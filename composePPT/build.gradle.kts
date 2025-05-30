@@ -3,18 +3,17 @@ import org.jetbrains.kotlin.gradle.plugin.PLUGIN_CLASSPATH_CONFIGURATION_NAME
 plugins {
     id("kotlin")
     id("com.vanniktech.maven.publish")
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.20"
 }
 
 dependencies {
-    api("org.jetbrains.compose.runtime:runtime:1.4.0")
+    api("org.jetbrains.compose.runtime:runtime:1.8.1")
 
     implementation("org.apache.poi:poi:5.2.2")
     implementation("org.apache.poi:poi-ooxml:5.2.2")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
-    // Add the compose compiler to kotlin compiler classpath
-    add(PLUGIN_CLASSPATH_CONFIGURATION_NAME, "org.jetbrains.compose.compiler:compiler:1.4.5")
 }
 
 tasks.test {
@@ -30,4 +29,8 @@ allprojects {
             sonatypeHost = com.vanniktech.maven.publish.SonatypeHost.S01
         }
     }
+}
+
+kotlin {
+    jvmToolchain(11)
 }
